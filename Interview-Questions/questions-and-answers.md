@@ -111,7 +111,7 @@ The following example creates an object along with additional new properties.
 ### **4. Function constructor :**
 In this approach, create any function and apply the new operator to create object instances. This was the main way to do constructor-based OOP before ES6 classes.
 
-    ```javascript
+```javascript
     function Person(name) {
     this.name = name;
     this.age = 21;
@@ -246,4 +246,20 @@ A :
     [] === []             // false
     {} == {}              // false     (different object references)
     {} === {}             // false
+```
+
+## Q : What is a first class function?
+A :
+- In JavaScript, `first-class functions`(first-class citizens) mean that functions are treated like any other variable. That means:
+
+- You can pass a function as an argument to another function.
+- You can return a function from another function.
+- You can assign a function to a variable.
+- This capability enables powerful patterns like callbacks, higher-order functions, event handling, and functional programming in JavaScript.
+
+- For **example**, the handler function below is assigned to a variable and then passed as an argument to the addEventListener method.
+
+```javascript
+    const handler = () => console.log("This is a click handler function");
+    document.addEventListener("click", handler);
 ```
