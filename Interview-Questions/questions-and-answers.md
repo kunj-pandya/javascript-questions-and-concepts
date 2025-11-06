@@ -3,8 +3,6 @@
 A :
 - JavaScript is a high-level, dynamic, interpreted programming language that powers the interactive behavior of web pages.
  - It’s based on the ECMAScript specification and supports event-driven, functional, and object-oriented programming styles.
-- JavaScript is a high-level, dynamic, interpreted programming language that powers the interactive behavior of web pages.
-- It’s based on the ECMAScript specification and supports event-driven, functional, and object-oriented programming styles.
 - With modern engines like V8 and environments like Node.js, JavaScript has evolved from a browser scripting language to a full-stack, general-purpose language used for building web, mobile, and even desktop applications.
 
 - **Key Features :**
