@@ -144,3 +144,143 @@ An array is a **special object** that stores a collection of values (like string
     const arr = [2, 4,6 ];
     arr.forEach((num) => console.log(num * 2)); // 4 8 12
 ```
+
+
+### **4. Sorting & Reversing**
+
+13. `sort()` : Sorts elements in-pace as a string (be careful with the numbers).
+
+**Example**
+
+```Javascript
+    const nums = [ 5, 10, 2];
+
+    // nums.sort(); // [10, 2, 5] ❌
+
+    console.log(nums.sort((a,b) => a - b )); //[2, 5, 10]
+```
+
+14. `revers()` : Reverses the array order in-place..
+
+**Example**
+
+```Javascript
+    const letters = ["a", "b", "c"];
+    letters.reverse(); // ['c', 'b', 'a']
+```
+
+
+### **5. Combining & Slicing Arrays**
+
+15. `concat()` : Merges arrays.
+
+**Example**
+
+```Javascript
+    const a = [1, 2];
+    const b = [3, 4];
+    const merged = a.concat(b); // [1, 2, 3, 4]
+```
+
+16. `slice()`: Returns a portion of the array (does not change the original).
+
+**Example**
+
+```Javascript
+    const arr = [10, 20, 30, 40];
+    const part = arr.slice(1, 3);
+    console.log(part); // [20, 30]
+```
+
+17. `splice()`: Changes the array (adds/removes elements).
+
+**Example**
+
+```Javascript
+    const arr = [1, 2, 3, 4];
+    arr.splice(1, 2, 99, 100); // remove 2,3 and add 99,100
+    console.log(arr); // [1, 99, 100, 4]
+``` 
+
+
+### 6. Conversion & Joining
+
+18. `join()` : Joins all elements into a string.
+
+**Example**
+
+```Javascript
+    const arr = ["React", "Node", "MongoDB"];
+    console.log(arr.join(" - ")); // React - Node - MongoDB
+```
+
+19. `toString()` : Converts array to a comma-separated string.
+
+**Example**
+
+```Javascript
+    [1, 2, 3].toString(); // "1,2,3"
+```
+
+### 7. Other Useful Methods 
+
+20. `flat()` : Flattens nested arrays.
+
+**Example**
+
+```Javascript
+    const arr = [1, [2, [3]]];
+    console.log(arr.flat(2)); // [1, 2, 3]
+```
+
+21. `some() / every()` : 
+    some() → at least one passes
+    every() → all must pass
+
+**Example**
+
+```Javascript
+    const arr = [10, 20, 30];
+    console.log(arr.some((n) => n > 25)); // true
+    console.log(arr.every((n) => n > 5)); // true
+```
+
+22. `from() and isArray()` :
+
+**Example**
+
+```Javascript
+   Array.isArray([1, 2]); // true
+    Array.from("Kunj"); // ['K', 'u', 'n', 'j']
+```
+
+### 🌐 Real-World Use Cases
+
+| Method               | Example Use Case                     |
+| -------------------- | ------------------------------------ |
+| `map()`              | Transforming API response data       |
+| `filter()`           | Filtering users or products          |
+| `reduce()`           | Calculating totals (expenses, sales) |
+| `find()`             | Searching a user by ID               |
+| `some()` / `every()` | Validation checks                    |
+| `splice()`           | Editing/removing items in a list     |
+| `push()` / `pop()`   | Managing chat message history        |
+
+
+- `map`, `filter`, `reduce`, `find` daily — these are functional programming methods.
+- `forEach()` is great for side effects (logging, DOM manipulation).
+- `slice()` is non-mutating, while `splice()` mutates.
+- `map`, `filter`, `reduce` always return new arrays (great for immutability in React).
+
+
+### 🚀 Quick Memory Pattern
+
+| Action       | Method                             |
+| ------------ | ---------------------------------- |
+| Add / Remove | push, pop, shift, unshift, splice  |
+| Search       | find, findIndex, includes, indexOf |
+| Transform    | map, filter, reduce, forEach       |
+| Combine      | concat, join                       |
+| Slice / Copy | slice                              |
+| Check        | some, every, isArray               |
+| Flatten      | flat                               |
