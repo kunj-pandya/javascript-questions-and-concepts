@@ -17,10 +17,10 @@ const removeDuplicats = num.filter((item, index) => {
 
 console.log(removeDuplicats); // [ 2, 4, 6, 8 ]
 
-//  Q : Remove duplicats with the use of `filter()` and `indexOf()`.
+//  Q :  keep-duplicats case-insensitive for string. (e.g. "A" & "a" are same.)
 
 function removeDup(arr) {
-    const newArray = [...new Set(arr.map((item) => 
+    const newArray = [...new Set(arr.map((item) =>
         item.toLowerCase()
     ))]
     return newArray;
