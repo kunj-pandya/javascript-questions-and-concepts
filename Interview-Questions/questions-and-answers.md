@@ -207,24 +207,60 @@ The following code creates a new empty object whose prototype is null.
 The following example creates an object along with additional new properties.
 
 ```javascript
-    let vehicle = {
-    wheels: "4",
-    fuelType: "Gasoline",
-    color: "Green",
-    };
+let vehicle = {
+wheels: "4",
+fuelType: "Gasoline",
+color: "Green",
+};
 
+let carProps = {
+type: {
+    value: "Volkswagen",
+},
+model: {
+    value: "Golf",
+},
+};
+
+var car = Object.create(vehicle, carProps);
+
+console.log(car.type);   // Volkswagen
+console.log(car.model);  // Golf
+console.log(car.wheels); // 4 (inherited)
+
+console.log(car); // {} ❌
+```
+
+- console.log(car) shows {}
+- because the properties (type, model) are non-enumerable by default when defined using property descriptors in Object.create().
+- Example :- 
+    ```Javascript
+    {
+        value: "Volkswagen",
+        writable: false,  // ❌ cannot change the value
+        enumerable: false,   // ❌ not shown in console or loops
+        configurable: false // ❌ cannot delete or redefine
+    }
+    ```
+- So console.log(car) doesn’t display them directly — because enumerable: false hides them from normal listing.
+- Fix (make them visible):
+- If you want them to appear when logging or looping, set enumerable: true
+  - Example :
+  ```Javascript
     let carProps = {
     type: {
         value: "Volkswagen",
+        enumerable: true,
     },
     model: {
         value: "Golf",
+        enumerable: true,
     },
     };
 
     var car = Object.create(vehicle, carProps);
     console.log(car);
-```
+  ```
 
 ### **4. Function constructor :**
 In this approach, create any function and apply the new operator to create object instances. This was the main way to do constructor-based OOP before ES6 classes.
