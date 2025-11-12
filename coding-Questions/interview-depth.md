@@ -34,3 +34,29 @@ function removeDup(arr) {
 
 console.log(removeDup(["apple", "BANANA", "Apple", "banana"]));
 ```
+
+### Q :  Remove Duplicate without Set(). (using for loop.)
+
+```Javascript
+const removeDuplicatsArray = (array) => {
+    let uniqueArray = [];
+
+    for (let i = 0; i <= array.length - 1 ; i++) {
+        if(uniqueArray.indexOf(array[i]) === -1) {
+            uniqueArray.push(array[i]);
+        }
+    }
+    return uniqueArray;
+};
+
+console.log(removeDuplicatsArray([5, 10, 15, 5, 20, 15])); // [ 5, 10, 15, 20 ]
+```
+- In Simple Words.
+1. Starts with an empty array -> uniqueArray = [];
+2. Loop over each element of the input.
+3. For each element
+     - if it's not already inside uniqueArray, push it.
+     - if it's already there, skip it.
+4. finally return the array of unique values.
+
+---

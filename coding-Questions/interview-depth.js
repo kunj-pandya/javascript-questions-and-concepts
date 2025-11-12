@@ -28,4 +28,20 @@ function removeDup(arr) {
 
 console.log(removeDup(["APPLE", "BANANA", "banana", "apple"]));  // [ 'apple', 'banana' ]
 
+//  Q :  Remove Duplicate without Set(). (using for loop.)
+
+const removeDuplicatsArray = (array) => {
+    let uniqueArray = [];
+
+    for (let i = 0; i <= array.length - 1 ; i++) {
+        if(uniqueArray.indexOf(array[i]) === -1) {
+            uniqueArray.push(array[i]);
+        }
+    }
+    return uniqueArray;
+};
+
+console.log(removeDuplicatsArray([5, 10, 15, 5, 20, 15])); // [ 5, 10, 15, 20 ]
+
+
 // ------------------------------------------------------------------------------------------
