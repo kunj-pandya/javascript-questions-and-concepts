@@ -1,0 +1,212 @@
+=========================================
+🔥 JAVASCRIPT EVENT LOOP CHEAT SHEET 🔥
+=========================================
+
+🚀 CORE CONCEPT:
+-----------------------------------------
+- JavaScript is single-threaded.
+- It executes one task at a time (Call Stack).
+- Asynchronous tasks (Promises, setTimeout, fetch) are handled by the runtime.
+- Event Loop continuously checks:
+  1️⃣ Is the call stack empty?
+  2️⃣ If yes → execute all Microtasks
+  3️⃣ Then → execute one Macrotask
+  4️⃣ Repeat 🔁
+
+
+⚙️ MAIN COMPONENTS:
+-----------------------------------------
+1️⃣ CALL STACK  → executes synchronous code.
+2️⃣ WEB APIs    → handle async operations.
+3️⃣ MICROTASK QUEUE → Promises, async/await continuations.
+4️⃣ MACROTASK QUEUE → setTimeout, setInterval, I/O, fetch.
+5️⃣ EVENT LOOP → moves tasks from queues to stack.
+
+
+📦 PRIORITY ORDER:
+-----------------------------------------
+1. Synchronous (stack)
+2. Microtasks (Promise.then, await)
+3. Macrotasks (setTimeout, fetch, DOM events)
+
+🧠 Easy Trick:  Stack → Promise → Timeout
+
+
+-----------------------------------------
+🧩 COMMON OUTPUT PATTERNS
+-----------------------------------------
+
+🧠 Example 1:
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+Promise.resolve().then(() => console.log("C"));
+console.log("D");
+
+✅ Output:
+A
+D
+C
+B
+(Reason: Promise (microtask) before Timeout (macrotask))
+
+
+🧠 Example 2:
+async function foo() {
+  console.log("1");
+  await Promise.resolve();
+  console.log("2");
+}
+console.log("3");
+foo();
+console.log("4");
+
+✅ Output:
+3
+1
+4
+2
+(Reason: await pauses at microtask, runs after sync)
+
+
+🧠 Example 3:
+setTimeout(() => console.log("A"), 0);
+Promise.resolve().then(() => console.log("B"));
+console.log("C");
+
+✅ Output:
+C
+B
+A
+
+
+🧠 Example 4:
+setTimeout(() => {
+  console.log("2");
+  Promise.resolve().then(() => console.log("3"));
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("4");
+  setTimeout(() => console.log("5"), 0);
+});
+
+console.log("1");
+
+✅ Output:
+1
+4
+2
+3
+5
+(Reason: Promise > Timeout; microtasks inside macrotask run before next macrotask)
+
+
+🧠 Example 5:
+async function test() {
+  console.log("D");
+  await Promise.resolve();
+  console.log("E");
+}
+console.log("A");
+setTimeout(() => {
+  console.log("B");
+  Promise.resolve().then(() => console.log("C"));
+}, 0);
+test();
+Promise.resolve().then(() => {
+  console.log("F");
+  setTimeout(() => console.log("G"), 0);
+});
+console.log("H");
+
+✅ Output:
+A
+D
+H
+E
+F
+B
+C
+G
+
+
+-----------------------------------------
+⚡ MICROTASKS vs MACROTASKS:
+-----------------------------------------
+MICROTASKS (high priority)
+- Promise.then()
+- queueMicrotask()
+- process.nextTick() (Node.js)
+- async/await continuations
+
+MACROTASKS (lower priority)
+- setTimeout()
+- setInterval()
+- setImmediate()
+- I/O callbacks
+- fetch / network responses
+
+Order Rule:
+→ After every synchronous task:
+   - Run ALL microtasks
+   - Then run the next macrotask
+
+
+-----------------------------------------
+🧩 COMMON INTERVIEW Q&A:
+-----------------------------------------
+Q1. What is the Event Loop?
+👉 It’s a mechanism that coordinates execution between the Call Stack and Task Queues.
+
+Q2. Why do Promises run before setTimeout?
+👉 Because Promises go in the Microtask Queue, which runs before the Macrotask Queue.
+
+Q3. What does “await” actually do?
+👉 It pauses async function execution and schedules the rest as a microtask.
+
+Q4. What’s the difference between microtask and macrotask?
+👉 Microtasks are processed right after the current stack, before any macrotask.
+
+Q5. Is the Event Loop part of JS Engine?
+👉 ❌ No, it’s part of the runtime (Browser / Node.js).
+
+Q6. What happens if microtasks keep adding new microtasks?
+👉 Infinite microtask loop → macrotasks starved → browser freeze.
+
+
+-----------------------------------------
+💡 QUICK MEMORY RECAP:
+-----------------------------------------
+🧠 JS is single-threaded
+🧠 Stack → Microtasks → Macrotasks
+🧠 Promises & await = microtasks
+🧠 setTimeout = macrotask
+🧠 Microtasks inside macrotask run before next macrotask
+🧠 Event Loop = the scheduler that coordinates all this
+
+🧩 Mnemonic:
+"**Stack, Promise, Timeout — In That Order Always!**"
+
+
+-----------------------------------------
+🎯 REAL-WORLD APPLICATIONS:
+-----------------------------------------
+✅ Avoid UI blocking in browsers.
+✅ Helps async operations run smoothly.
+✅ Critical for understanding Node.js event loop & async behavior.
+
+
+-----------------------------------------
+🔥 FINAL REVISION (1-Minute Recap)
+-----------------------------------------
+→ Single Threaded
+→ Call Stack executes sync
+→ Web APIs handle async
+→ Microtasks first (Promise, await)
+→ Macrotasks later (Timeout)
+→ Event Loop manages execution flow
+→ Rule: Synchronous → Microtasks → Macrotasks
+
+=========================================
+END OF EVENT LOOP CHEAT SHEET
+=========================================
