@@ -33,6 +33,126 @@ A :
 -  `undefined` typically means a variable has been declared but not yet assigned a value. It's also the default return value of functions that don't explicitly return anything.
 -   `null` is an assignment value. It can be assigned to a variable as a representation of "no value" or an intentional absence of any object value.
 
+## Q : What is the difference between == and === operators?
+A :
+- JavaScript provides two types of equality operators:
+
+- Loose equality (==, !=): Performs type conversion if the types differ, comparing values after converting them to a common type.
+- Strict equality (===, !==): Compares both value and type, without any type conversion.
+
+## Q : Explain `Function defination`?
+A : 
+
+### Function Defination :
+A function in Javascript is a reusable block of code designed to perform specific task.
+you define it once and use it whenever needed.
+
+**Syntex**
+```Javascript
+function greet() {
+    console.log("good morning");
+}
+greet();
+```
+- here function is a keyword to define Function, greet is a name of function, and {} code to be executed.
+
+## Q : Explain what is difference between Function Statement, Function Expression, Function Declarations, Named Function Expression & Annonymouse Function.?
+
+A :
+
+### **Function Statement** a.k.a. **Function declaration** :
+standerd way to define the function.
+
+```Javascript
+function sayHello(){
+    console.log("hello kunj");
+}
+sauHello();
+```
+
+- `Hoisted` :- can be called before it's defined.
+- `Named`:- the function has a name sayHello.
+- Defined using function keyword.
+- function statement are also known as  function declaration.
+
+### **Function Expression** :
+
+function expression means assigning a function to a variable.
+
+```Javascript
+const sayBay = function(){
+    console.log("bye, kunj");
+}
+
+sayBye(); // bye, kunj
+```
+- The Function here is annonymouse(no name)
+- assigned to a single vaariable sayBye
+- not hosited like declaration/ statement
+- must be defined before use otherwise it can lead to be Error : Can't access before initalization.
+- annonymouse function often used in
+  - Callbackes
+  - event handlers
+  - Array methods
+  - Example :- 
+   ```Javascript
+   setTimeout(function() {
+    console.log("hello after 2 secounds");
+   ,2000})
+   ```
+
+### **Named Function Expression**
+
+```Javascript
+const saySomething = function speak() {
+    console.log("speaking.....");
+};
+
+saySomething(); // speaking.....
+
+// speak(); ❌ReferenceError :- speak is not defined
+```
+- speak is only available inside the function itself.
+   - Example :-
+   ```Javascript
+   const factorial = function findFact(n){
+    if(n === 0) return 1;
+
+    return n * findFact(n - 1);
+    // works, can call it self.
+   }
+
+   console.log(factoral(5)); // 125
+   ```
+
+-some questions and awnser that can be asked in interview.
+
+Q1. difference between function Declaration & Function expression?
+- function declaration /statement are hosited, function expression are not.
+- declaration are available anywhere in the scope, expression are available only after initalization.
+
+Q2. Can annonymous function can be hosited?
+- No, they exits only when assigned to a variable or passed as an argument.
+
+Q3. Why use named function expression ?
+- for debugging and recursion(Calling it self the function.) 
+
+## Q : What is a first class function?
+A :
+- In JavaScript, `first-class functions`(first-class citizens) mean that functions are treated like any other variable. That means:
+
+- You can pass a function as an argument to another function.
+- You can return a function from another function.
+- You can assign a function to a variable.
+- This capability enables powerful patterns like callbacks, higher-order functions, event handling, and functional programming in JavaScript.
+
+- For **example**, the handler function below is assigned to a variable and then passed as an argument to the addEventListener method.
+
+```javascript
+    const handler = () => console.log("This is a click handler function");
+    document.addEventListener("click", handler);
+```
+
 
 ## Q : What are the possible ways to create objects in JavaScript?
 A  : 
@@ -205,13 +325,6 @@ const jsonString = JSON.stringify(obj);  // '{"name":"Jane","age":25}'
 ```
 
 
-## Q : What is the difference between == and === operators?
-A :
-- JavaScript provides two types of equality operators:
-
-- Loose equality (==, !=): Performs type conversion if the types differ, comparing values after converting them to a common type.
-- Strict equality (===, !==): Compares both value and type, without any type conversion.
-
 ### Strict Equality (===)
 
 - Two strings are strictly equal if they have exactly the same sequence of characters and length.
@@ -246,18 +359,3 @@ A :
     {} === {}             // false
 ```
 
-## Q : What is a first class function?
-A :
-- In JavaScript, `first-class functions`(first-class citizens) mean that functions are treated like any other variable. That means:
-
-- You can pass a function as an argument to another function.
-- You can return a function from another function.
-- You can assign a function to a variable.
-- This capability enables powerful patterns like callbacks, higher-order functions, event handling, and functional programming in JavaScript.
-
-- For **example**, the handler function below is assigned to a variable and then passed as an argument to the addEventListener method.
-
-```javascript
-    const handler = () => console.log("This is a click handler function");
-    document.addEventListener("click", handler);
-```
