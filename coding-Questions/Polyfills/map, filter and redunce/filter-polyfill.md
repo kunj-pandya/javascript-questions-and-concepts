@@ -22,7 +22,7 @@ Callback receives:
 Array.prototype.myFilter = function(callback, thisArg){
 
     if(typeof callback !== "function"){
-        throw new TypeError(callback + "is not a function");
+        throw new TypeError(callback + " is not a function");
     }
 
     const result = [];
