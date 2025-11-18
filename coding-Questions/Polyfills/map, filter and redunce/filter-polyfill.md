@@ -20,20 +20,27 @@ Callback receives:
 
 ```Javascript
 Array.prototype.myFilter = function(callback, thisArg){
+    
+    // Validate this
+    if (this === null || this === undefined) {
+        throw new TypeError("Cannot read property 'filter' of null or undefined");
+    }
 
     if(typeof callback !== "function"){
         throw new TypeError(callback + " is not a function");
     }
 
     const result = [];
-    const arr = this;
+    const arr = Object(this);        // ToObject 
+    const length = arr.length >>> 0; // ToUint32 
 
-    for(let i = 0; i < arr.length; i++){
+    for(let i = 0; i < length; i++){
 
-        if(!arr.hasOwnProperty(i)) continue;
-
+        // Skip holes
+        if(i in arr){
         if(callback.call(thisArg, arr[i], i ,arr)){
             result.push(arr[i]);
+        }
         }
     }
     return result;
@@ -50,51 +57,6 @@ console.log(ans);
  */
 
 ```
-
-## 📌 Why do we use negative checking? (`!arr.hasOwnProperty(i)`)
-
-Checks if index i actually exists as a real element inside the array.
-
-- true → real element
-- false → hole, inherited prop, or fake value
-
-✔️ `!arr.hasOwnProperty(i)`
-
-The ! (NOT) flips the result:
-
-- Real element → `true` becomes `false`
-- Not a real element → `false` becomes `true`
-
-✔️ What does `continue` do?
-
-- continue skips the rest of that loop iteration and moves to the next index.
-
-So:
-```Javascript
-if (!arr.hasOwnProperty(i)) continue;
-```
-
-👉 If this index is NOT a real element, skip it and move to the next one.
-
-🔥 Why is this needed?
-
-Because we don't want to run callback on:
-
-- missing elements
-- inherited prototype keys
-- non-numeric keys
-- empty holes in arrays like [1, , 3]
-
-**Example:**
-```Javascript
-const arr = [1, , 3];
-arr.test = "hello";
-
-for (let i in arr) {
-  console.log(i); // prints: 0, 2, test  (bad!)
-}
-```
-The negative check ensures we ignore 'test' and the empty hole.
 
 ## 📌 Filter Condition Explanation :
 
@@ -119,3 +81,16 @@ if (callback.call(thisArg, arr[i], i, arr)) {
 [1, 2, 3, 4].filter(num => num > 2);
 ```
 Result: [3, 4]
+
+
+📝 Note
+
+- All shared concepts like:
+- Object(this)
+- `>>>` 0
+- skipping holes with i in arr
+- callback.call
+- thisArg
+
+are already fully explained in the `map-polyfill` markdown,
+so they are not repeated here to keep notes clean and readable.
