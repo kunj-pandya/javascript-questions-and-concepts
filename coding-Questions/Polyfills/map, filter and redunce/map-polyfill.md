@@ -16,21 +16,31 @@ Callback receives:
 ## Map Polyfill
 ```Javascript
 Array.prototype.myMap = function (callback, thisArg) {
+
+   // Validate callback
     if (typeof callback !== "function") {
         throw new TypeError(callback + " is not a function");
     }
+   
+   // tore result and array reference
+   const result = [];
+   const arr = this;
 
-    const result = [];
-    const arr = this; //the array on which map is called.
+   // 3️⃣ Loop through array
+   for (let i = 0; i < arr.length; i++) {
 
-    for (let i = 0; i < arr.length; i++) {
-        if (arr.hasOwnProperty(i)) {
-            const mapedValue = callback.call(thisArg, arr[i], i, arr);
-            result.push(mapedValue);
-        }
-    }
+      // Skip holes / inherited keys
+      if (arr.hasOwnProperty(i)) {
 
-    return result;
+         // Execute callback with thisArg
+         const mappedValue = callback.call(thisArg, arr[i], i, arr);
+
+          // Push transformed value
+         result.push(mapedValue);
+      }
+   }
+
+   return result;
 }
 
 console.log([1, 2, 3, 4, 5].myMap(x => x * 2)); // [ 2, 4, 6, 8, 10 ]
