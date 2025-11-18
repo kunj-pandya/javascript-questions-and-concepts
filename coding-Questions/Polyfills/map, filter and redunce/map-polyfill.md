@@ -17,30 +17,30 @@ Callback receives:
 ```Javascript
 Array.prototype.myMap = function (callback, thisArg) {
 
-   // Validate callback
+    // Validate callback
     if (typeof callback !== "function") {
         throw new TypeError(callback + " is not a function");
     }
-   
-   // tore result and array reference
-   const result = [];
-   const arr = this;
 
-   // 3️⃣ Loop through array
-   for (let i = 0; i < arr.length; i++) {
+    // tore result and array reference
+    const result = [];
+    const arr = this;
 
-      // Skip holes / inherited keys
-      if (arr.hasOwnProperty(i)) {
+    // Loop through array
+    for (let i = 0; i < arr.length; i++) {
 
-         // Execute callback with thisArg
-         const mappedValue = callback.call(thisArg, arr[i], i, arr);
+        // Skip holes / inherited keys
+        if (arr.hasOwnProperty(i)) {
 
-          // Push transformed value
-         result.push(mapedValue);
-      }
-   }
+            // Execute callback with thisArg
+            const mappedValue = callback.call(thisArg, arr[i], i, arr);
 
-   return result;
+            // Push transformed value
+            result.push(mappedValue);
+        }
+    }
+
+    return result;
 }
 
 console.log([1, 2, 3, 4, 5].myMap(x => x * 2)); // [ 2, 4, 6, 8, 10 ]
@@ -149,6 +149,18 @@ this = person
 
 - 📌 Important:
 `Arrow functions` IGNORE thisArg because they do NOT have their own this.
+
+## Using thisArg in example
+
+```Javascript
+const multiplier = { factor: 3 };
+
+const ans = [1, 2, 3].myMap(function (x) {
+    return x * this.factor;
+}, multiplier);
+
+console.log(ans);
+```
 
 
 ## ⭐ Visual Call Stack Diagram
