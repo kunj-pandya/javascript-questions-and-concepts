@@ -1,5 +1,5 @@
 # Array.prototype.map()
-
+---
 
 ## What is map()?
 
