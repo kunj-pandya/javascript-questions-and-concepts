@@ -1,4 +1,3 @@
-// shariyuns coding school
 // --------------------------------------------------------
 // Q : For loop that skips the even numbers between 1 and 20.
 for (let i = 0; i <= 20; i++) {
