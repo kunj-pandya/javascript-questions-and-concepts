@@ -25,8 +25,8 @@ because we also check **EVERY NUMBER**.
 ```Javascript
 function isPrime(number) {
     if (number <= 1) return false; // negatives, 0, 1 are not prime
-    if (number === 2) return true; // skip all even numbers
-    if (number % 2 === 0) return false; // 2 is the only even prime
+    if (number === 2) return true; // 2 is the only even prime
+    if (number % 2 === 0) return false; // skip all even numbers
 
 
     for (let i = 3; i < Math.sqrt(number); i += 2) { // check only odd numbers
