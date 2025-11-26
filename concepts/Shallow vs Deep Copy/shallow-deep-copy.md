@@ -114,9 +114,6 @@ These do NOT deep copy nested objects.
 const deep = structuredClone(original);
 ```
 
-## Q :
-A
-
 ## Q : Does spread operator {...obj} create deep or shallow copy?
 A : Shallow copy.
 
