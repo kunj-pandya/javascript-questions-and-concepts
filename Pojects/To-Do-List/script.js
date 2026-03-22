@@ -1,10 +1,10 @@
 const todoInput = document.getElementById("todo-input");
-const addTaskInput = document.getElementById("add-task-btn");
+const addTaskButton = document.getElementById("add-task-btn");
 const todoList = document.getElementById("todo-list");
 
 let tasks = [];
 
-addTaskInput.addEventListener("click", () => {
+addTaskButton.addEventListener("click", () => {
     const taskText = todoInput.value.trim();
 
     if (taskText === "") return;
@@ -19,3 +19,4 @@ addTaskInput.addEventListener("click", () => {
 
     todoInput.value = "";
 });
+
